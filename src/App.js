@@ -1,25 +1,24 @@
-import logo from './logo.svg';
-import './App.css';
+import React from 'react'
+import SearchBar from './components/search/SearchBar'
+import SearchResults from './components/search/SearchResults'
+import PlayList from './components/PlayList'
+import TrackList from './components/track/TrackList'
+import Track from './components/track/Track'
 
 function App() {
   return (
-    <div className="App">
-      <header className="App-header">
-        <img src={logo} className="App-logo" alt="logo" />
-        <p>
-          Edit <code>src/App.js</code> and save to reload.
-        </p>
-        <a
-          className="App-link"
-          href="https://reactjs.org"
-          target="_blank"
-          rel="noopener noreferrer"
-        >
-          Learn React
-        </a>
-      </header>
+    <div className='App'>
+      <h1 className='title'>
+        Ja<span>mmm</span>ing
+      </h1>
+      <SearchBar />
+      <SearchResults />
+
+      <PlayList />
+      <TrackList />
+      <Track />
     </div>
-  );
+  )
 }
 
-export default App;
+export default App
