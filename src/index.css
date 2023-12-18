@@ -9,7 +9,11 @@
 
 body {
   background: url('background_photo.jpg') no-repeat center center/cover;
-  line-height: 1.4;
+  line-height: 1.6;
+}
+
+hr {
+  margin: 10px 0;
 }
 
 /* App */
@@ -53,3 +57,18 @@ body {
 }
 
 /* Search Results */
+.results {
+  background-color: #010c3f;
+  opacity: 0.8;
+  padding: 15px;
+  width: 55%;
+  margin: 0 25px;
+}
+
+.results h1, .name {
+  color: #fff;
+}
+
+.results span {
+  color: #909090;
+}
