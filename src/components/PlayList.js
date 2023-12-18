@@ -2,9 +2,9 @@ import React from 'react'
 
 function PlayList() {
   return (
-    <div>
+    <div className='playlist box'>
       <h1>PlayList</h1>
-      <button>Save to Spotify</button>
+      <button className='save-btn'>Save to Spotify</button>
     </div>
   )
 }

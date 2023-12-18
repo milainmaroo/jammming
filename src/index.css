@@ -16,6 +16,10 @@ hr {
   margin: 10px 0;
 }
 
+h1, h3 {
+  color: #fff;
+}
+
 /* App */
 .title {
   color: #fff;
@@ -32,43 +36,78 @@ hr {
 .search-container {
   text-align: center;
   margin: 10px 0;
-  /* border: 1px solid #fff; */
 }
 
 .search-input {
+  margin-top: 10px;
   padding: 10px;
   font-size: 15px;
-  width: 250px;
+  width: 270px;
 }
 
-.search-button {
+.search-btn {
   padding: 10px;
   font-size: 16px;
-  margin-top: 10px;
+  margin-top: 20px;
   width: 100px;
   border-radius: 25px;
+  border-style: none;
   background-color: #010c3f;
   color: #fff;
   cursor: pointer;
 }
 
-.search-button:hover {
+.search-btn:hover {
   background-color: rgba(108, 65, 233, .7);
+}
+
+/* Search Results and Playlist */
+.container {
+  display: flex;
+}
+
+.box {
+  background-color: #010c3f;
+  opacity: 0.8;
+  padding: 15px;
+  margin: 30px 25px 20px 25px;
+  height: 100vh;
+  overflow-y: auto;
 }
 
 /* Search Results */
 .results {
-  background-color: #010c3f;
-  opacity: 0.8;
-  padding: 15px;
   width: 55%;
-  margin: 0 25px;
-}
-
-.results h1, .name {
-  color: #fff;
 }
 
 .results span {
   color: #909090;
 }
+
+.add-btn {
+  float: right;
+  border: none;
+  color: #fff;
+  background-color: transparent;
+  padding: 0 15px;
+  font-size: 20px;
+  cursor: pointer;
+}
+
+/* PlayList */
+.playlist {
+  width: 45%;
+}
+
+.save-btn {
+  background-color: rgba(108, 65, 233, .7);
+  color: #fff;
+  padding: 15px 25px;;
+  border-radius: 25px;
+  border-style: none;
+  text-transform: uppercase;
+  margin: 10px auto;
+  display: block;
+  cursor: pointer;
+}
+

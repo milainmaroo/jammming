@@ -9,7 +9,7 @@ function SearchBar() {
         placeholder='Search...'
       ></input>{' '}
       <br />
-      <button className='search-button' type='submit'>
+      <button className='search-btn' type='submit'>
         Search
       </button>
     </div>

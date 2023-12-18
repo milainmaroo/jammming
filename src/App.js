@@ -35,11 +35,11 @@ function App() {
         Ja<span>mmm</span>ing
       </h1>
       <SearchBar />
-      <SearchResults tracks={searchResults} />
 
-      <PlayList />
-      <TrackList />
-      <Track />
+      <div className='container'>
+        <SearchResults tracks={searchResults} />
+        <PlayList />
+      </div>
     </div>
   )
 }
