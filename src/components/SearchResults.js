@@ -1,10 +1,13 @@
 import React from 'react'
+import TrackList from './TrackList'
 
-function SearchResults({ tracks }) {
+function SearchResults({ tracks, onAdd }) {
   return (
     <div className='results box'>
       <h1>Results</h1>
-      <ul>
+      {/* Add TrackList Component */}
+      <TrackList tracks={SearchResults} onAdd={onAdd} isRemoval={false} />
+      {/* <ul>
         {tracks.map((track, id) => (
           <li key={id}>
             <h3>{track.name}</h3>
@@ -15,7 +18,7 @@ function SearchResults({ tracks }) {
             <hr />
           </li>
         ))}
-      </ul>
+      </ul> */}
     </div>
   )
 }
