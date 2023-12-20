@@ -1,21 +1,11 @@
 import React from 'react'
 import Track from './Track'
 
-function TrackList({ tracks, onAdd, onRemove, isRemoval }) {
+function TrackList({ tracks }) {
   return (
     <div>
       {/* Add Track Component */}
-      {tracks.map((track) => {
-        return (
-          <Track
-            key={track.id}
-            track={track}
-            onAdd={onAdd}
-            onRemove={onRemove}
-            isRemoval={isRemoval}
-          />
-        )
-      })}
+      <h1>TrackList</h1>
     </div>
   )
 }
