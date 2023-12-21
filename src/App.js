@@ -43,7 +43,7 @@ function App() {
 
   const [searchResults, setSearchResults] = useState([])
   const [playlistName, setPlayListName] = useState(playlistN)
-  const [playlistTracks, setPlayListTracks] = useState(playlistT)
+  const [playlistTracks, setPlayListTracks] = useState([])
 
   // // Function to update playlist name
   // const handlePlaylistNameChange = (newName) => {
@@ -92,8 +92,11 @@ function App() {
       )
     })
     setSearchResults(results)
-    console.log(keyword)
-    console.log(results)
+  }
+
+  // Save to Tracklist function
+  const saveToTracklist = (track) => {
+    setPlayListTracks([...playlistTracks, track])
   }
 
   return (
@@ -104,7 +107,10 @@ function App() {
       <SearchBar searchTracklist={searchTracklist} />
 
       <div className='container'>
-        <SearchResults tracks={searchResults} />
+        <SearchResults
+          tracks={searchResults}
+          saveToTracklist={saveToTracklist}
+        />
         <PlayList playlistName={playlistName} playlistTracks={playlistTracks} />
       </div>
     </div>

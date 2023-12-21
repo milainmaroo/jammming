@@ -1,12 +1,19 @@
 import React from 'react'
 import Track from './Track'
 
-function TrackList({ tracks }) {
+function TrackList({ tracks, saveToTracklist, isPlaylist }) {
   return (
-    <div>
+    <ul>
       {/* Add Track Component */}
-      <h1>TrackList</h1>
-    </div>
+      {tracks.map((track) => (
+        <Track
+          key={track.id}
+          track={track}
+          saveToTracklist={saveToTracklist}
+          isPlaylist={isPlaylist}
+        />
+      ))}
+    </ul>
   )
 }
 

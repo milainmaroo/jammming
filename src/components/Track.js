@@ -1,13 +1,17 @@
 import React from 'react'
 
-function Track({ track }) {
+function Track({ track, saveToTracklist, isPlaylist }) {
   return (
-    <div>
+    <li>
       <h3>{track.name}</h3>
-      <p>
+      <button className='add-btn' onClick={() => saveToTracklist(track)}>
+        {isPlaylist ? '-' : '+'}
+      </button>
+      <span>
         {track.artist} | {track.album}
-      </p>
-    </div>
+      </span>
+      <hr />
+    </li>
   )
 }
 
