@@ -66,6 +66,9 @@ function App() {
   }
 
   // Save Playlist
+  const savePlaylist = () => {
+    console.log('Saving playlist:', playlistName, playlistTracks)
+  }
 
   return (
     <div className='App'>
@@ -80,6 +83,7 @@ function App() {
           playlistTracks={playlistTracks}
           removeTrack={removeTrack}
           updatePlaylistName={updatePlaylistName}
+          savePlaylist={savePlaylist}
         />
       </div>
     </div>

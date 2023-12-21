@@ -1,8 +1,12 @@
 import React from 'react'
 import TrackList from './TrackList'
 
-function PlayList({ playlistTracks, removeTrack, updatePlaylistName }) {
-  // Pass down Playlist name and tracks from App component
+function PlayList({
+  playlistTracks,
+  removeTrack,
+  updatePlaylistName,
+  savePlaylist,
+}) {
   return (
     <div className='playlist box'>
       <input
@@ -18,7 +22,9 @@ function PlayList({ playlistTracks, removeTrack, updatePlaylistName }) {
         removeTrack={removeTrack}
       />
 
-      <button className='save-btn'>Save to Spotify</button>
+      <button className='save-btn' onClick={() => savePlaylist()}>
+        Save to Spotify
+      </button>
     </div>
   )
 }
