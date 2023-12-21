@@ -25,60 +25,9 @@ function App() {
     },
   ]
 
-  const playlistN = 'Default Playlist Name'
-  const playlistT = [
-    {
-      id: 4,
-      name: 'Example PlayList Name',
-      artist: 'Example Artist',
-      album: 'Example Album',
-    },
-    {
-      id: 5,
-      name: 'Example PlayList Name 2',
-      artist: 'Example Artist 2',
-      album: 'Example Album 2',
-    },
-  ]
-
   const [searchResults, setSearchResults] = useState([])
-  const [playlistName, setPlayListName] = useState(playlistN)
-  const [playlistTracks, setPlayListTracks] = useState([])
-
-  // // Function to update playlist name
-  // const handlePlaylistNameChange = (newName) => {
-  //   setPlayListName(newName)
-  // }
-
-  // // Function to update playlist tracks
-  // const handlePlaylistTracksChange = (newTracks) => {
-  //   setPlayListTracks(newTracks)
-  // }
-
-  // // Add Track to Playlist
-  // const addTrack = (track) => {
-  //   if (playlistTracks.find((playlistTrack) => playlistTrack.id === track.id))
-  //     return
-  //   setPlayListTracks((prevTracks) => [...prevTracks, track])
-  // }
-
-  // // Remove Track to Playlist
-  // const removeTrack = (track) => {
-  //   const isPresent = playlistTracks.filter(
-  //     (playlistTrack) => playlistTrack.id !== track.id
-  //   )
-  //   setPlayListTracks(isPresent)
-  // }
-
-  // // Update Playlist Name
-  // const updatePlaylistName = (name) => {
-  //   setPlayListName(name)
-  // }
-
-  // // Save Playlist
-  // const savePlaylist = () {
-  //   const trackURIs = playListTracks.map(track => track.uri)
-  // }
+  const [playlistTracks, setPlaylistTracks] = useState([])
+  const [playlistName, setPlaylistName] = useState('')
 
   // Search Tracklist function
   // name, artist, album from objects contain search 'keyword'
@@ -94,10 +43,29 @@ function App() {
     setSearchResults(results)
   }
 
-  // Save to Tracklist function
-  const saveToTracklist = (track) => {
-    setPlayListTracks([...playlistTracks, track])
+  // Add Track function / Save to Tracklist
+  const addTrack = (track) => {
+    if (
+      !playlistTracks.find((playlistTrack) => playlistTrack.id === track.id)
+    ) {
+      setPlaylistTracks([...playlistTracks, track])
+    }
   }
+
+  // Remove Track function
+  const removeTrack = (track) => {
+    const updatedTracks = playlistTracks.filter(
+      (playlistTrack) => playlistTrack.id !== track.id
+    )
+    setPlaylistTracks(updatedTracks)
+  }
+
+  // Update PlaylistName function
+  const updatePlaylistName = (name) => {
+    setPlaylistName(name)
+  }
+
+  // Save Playlist
 
   return (
     <div className='App'>
@@ -107,11 +75,12 @@ function App() {
       <SearchBar searchTracklist={searchTracklist} />
 
       <div className='container'>
-        <SearchResults
-          tracks={searchResults}
-          saveToTracklist={saveToTracklist}
+        <SearchResults tracks={searchResults} addTrack={addTrack} />
+        <PlayList
+          playlistTracks={playlistTracks}
+          removeTrack={removeTrack}
+          updatePlaylistName={updatePlaylistName}
         />
-        <PlayList playlistName={playlistName} playlistTracks={playlistTracks} />
       </div>
     </div>
   )

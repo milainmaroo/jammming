@@ -1,7 +1,7 @@
 import React from 'react'
 import Track from './Track'
 
-function TrackList({ tracks, saveToTracklist, isPlaylist }) {
+function TrackList({ tracks, isPlaylist, addTrack, removeTrack }) {
   return (
     <ul>
       {/* Add Track Component */}
@@ -9,8 +9,9 @@ function TrackList({ tracks, saveToTracklist, isPlaylist }) {
         <Track
           key={track.id}
           track={track}
-          saveToTracklist={saveToTracklist}
           isPlaylist={isPlaylist}
+          addTrack={addTrack}
+          removeTrack={removeTrack}
         />
       ))}
     </ul>

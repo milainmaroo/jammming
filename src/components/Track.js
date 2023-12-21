@@ -1,17 +1,25 @@
 import React from 'react'
 
-function Track({ track, saveToTracklist, isPlaylist }) {
+function Track({ track, isPlaylist, addTrack, removeTrack }) {
   return (
-    <li>
-      <h3>{track.name}</h3>
-      <button className='add-btn' onClick={() => saveToTracklist(track)}>
-        {isPlaylist ? '-' : '+'}
-      </button>
-      <span>
-        {track.artist} | {track.album}
-      </span>
-      <hr />
-    </li>
+    <div className='track'>
+      <li>
+        <h3>{track.name}</h3>
+        {isPlaylist ? (
+          <button className='btn' onClick={() => removeTrack(track)}>
+            -
+          </button>
+        ) : (
+          <button className='btn' onClick={() => addTrack(track)}>
+            +
+          </button>
+        )}
+        <span>
+          {track.artist} | {track.album}
+        </span>
+        <hr />
+      </li>
+    </div>
   )
 }
 

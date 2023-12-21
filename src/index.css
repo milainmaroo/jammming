@@ -80,11 +80,12 @@ h1, h3 {
   width: 55%;
 }
 
-.results span {
+.results span,
+.track span {
   color: #909090;
 }
 
-.add-btn {
+.btn {
   float: right;
   border: none;
   color: #fff;
@@ -97,6 +98,17 @@ h1, h3 {
 /* PlayList */
 .playlist {
   width: 45%;
+}
+
+.playlist input[type='text'] {
+  background: transparent;
+  border: none;
+  outline: none;
+  color: #fff;
+  font-size: 23px;
+  font-weight: bold;
+  margin-top: 5px;
+  padding: 5px 20px 0 0;
 }
 
 .save-btn {
