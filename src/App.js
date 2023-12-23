@@ -5,39 +5,38 @@ import PlayList from './components/PlayList'
 
 const CLIENT_ID = 'd745391f1c7542ed9ec2825f027562de'
 const CLIENT_SECRET = '79b6cad0660b4f7a9ab622aa2a14c9b3'
-const REDIRECT_URI = 'http://localhost:3000'
+// const REDIRECT_URI = 'http://localhost:3000'
 
 function App() {
-  const trackList = [
-    {
-      id: 1,
-      name: 'Gorgeous',
-      artist: 'Taylor Swift',
-      album: 'reputation',
-    },
-    {
-      id: 2,
-      name: 'Euphoria',
-      artist: 'BTS',
-      album: 'Love Yourself',
-    },
-    {
-      id: 3,
-      name: 'Galway Girl',
-      artist: 'Ed Sheeran',
-      album: 'Divide',
-    },
-  ]
-
+  // const trackList = [
+  //   {
+  //     id: 1,
+  //     name: 'Gorgeous',
+  //     artist: 'Taylor Swift',
+  //     album: 'reputation',
+  //   },
+  //   {
+  //     id: 2,
+  //     name: 'Euphoria',
+  //     artist: 'BTS',
+  //     album: 'Love Yourself',
+  //   },
+  //   {
+  //     id: 3,
+  //     name: 'Galway Girl',
+  //     artist: 'Ed Sheeran',
+  //     album: 'Divide',
+  //   },
+  // ]
   const [searchResults, setSearchResults] = useState([])
   const [playlistTracks, setPlaylistTracks] = useState([])
   const [playlistName, setPlaylistName] = useState('')
 
   const [token, setToken] = useState('')
 
+  // Get API Access Token
   useEffect(() => {
-    // API Access Token
-    let authParameters = {
+    let options = {
       method: 'POST',
       headers: {
         'Content-Type': 'application/x-www-form-urlencoded',
@@ -48,40 +47,69 @@ function App() {
         '&client_secret=' +
         CLIENT_SECRET,
     }
-    fetch('https://accounts.spotify.com/api/token', authParameters)
+    fetch('https://accounts.spotify.com/api/token', options)
       .then((result) => result.json())
       .then((data) => setToken(data.access_token))
       .catch((error) => console.log(error))
   }, [])
 
-  // useEffect(() => {
-  //   getTracks()
-  // }, [token])
+  // Save Playlist
+  const savePlaylist = async (name, trackUris) => {
+    let userId = ''
+    await fetch('https://api.spotify.com/v1/me', {
+      headers: { Authorization: `Bearer ${token}` },
+    })
+      .then((result) => result.json())
+      .then((userData) => {
+        console.log(`userData: ${userData}`)
+        userId = userData.id
+        fetch(`https://api.spotify.com/v1/users/${userId}/playlists`, {
+          headers: { Authorization: `Bearer ${token}` },
+          method: 'POST',
+          body: JSON.stringify({ name: name }),
+        })
+          .then((result) => result.json())
+          .then((playlistData) => {
+            console.log(`playlistData: ${playlistData}`)
+            const playlistId = playlistData.id
+            fetch(`https://api.spotify.com/v1/playlists/${playlistId}/tracks`, {
+              headers: { Authorization: `Bearer ${token}` },
+              method: 'POST',
+              body: JSON.stringify({ uris: trackUris }),
+            })
+          })
+        setPlaylistName(name)
+        setPlaylistTracks(trackUris)
+      })
+      .catch((error) => console.log(error))
+  }
 
   const getTracks = (keyword) => {
     let options = {
       method: 'GET',
-      headers: {
-        Authorization: `Bearer ${token}`,
-      },
+      headers: { Authorization: `Bearer ${token}` },
     }
+    // https://developer.spotify.com/documentation/web-api/reference/search
     fetch(`https://api.spotify.com/v1/search?q=${keyword}&type=track`, options)
       .then((result) => result.json())
       .then((data) => {
+        //console.log(data)
         const items = data.tracks.items.map((item) => {
           return {
             id: item.id,
             name: item.name,
             album: item.album.name,
             artist: item.artists[0].name,
+            uri: item.uri,
           }
         })
+        //console.log(items)
         setSearchResults(items)
       })
       .catch((error) => console.log(error))
   }
 
-  // Search Tracklist function
+  // Search Tracklist function - to get hardcoded data - trackList
   // name, artist, album from objects contain search 'keyword'
   // const searchTracklist = (keyword) => {
   //   keyword = keyword.toUpperCase()
@@ -104,6 +132,14 @@ function App() {
     }
   }
 
+  // Search Results
+  // const search = (keyword) => {
+  //   Spotify.search(keyword).then((result) => {
+  //     //setSearchResults(result)
+  //     console.log(result)
+  //   })
+  // }
+
   // Remove Track function
   const removeTrack = (track) => {
     const updatedTracks = playlistTracks.filter(
@@ -118,9 +154,9 @@ function App() {
   }
 
   // Save Playlist
-  const savePlaylist = () => {
-    console.log('Saving playlist:', playlistName, playlistTracks)
-  }
+  // const savePlaylist = () => {
+  //   console.log('Saving playlist:', playlistName, playlistTracks)
+  // }
 
   return (
     <div className='App'>
